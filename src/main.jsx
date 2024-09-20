@@ -14,6 +14,10 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
   },
+  {
+    path: "/signup",
+    element: <SingUp />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
