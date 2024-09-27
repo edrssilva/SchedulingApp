@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginHeader from "./LoginHeader";
-import InputLabel from "./InputLabel";
-import InputControl from "./InputControl";
-import ButtonPrimary from "./ButtonPrimary";
+import LoginHeader from "../components/LoginHeader";
+import InputLabel from "../components/InputLabel";
+import InputControl from "../components/InputControl";
+import ButtonPrimary from "../components/ButtonPrimary";
 
 function onSignUpClick(
   firstName,
