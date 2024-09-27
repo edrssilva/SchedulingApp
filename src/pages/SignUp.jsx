@@ -38,6 +38,7 @@ function SignUp() {
             id="firstName"
             name="firstName"
             placeholder="Insira seu primeiro nome"
+            required
           />
         </div>
         <div>
@@ -49,6 +50,7 @@ function SignUp() {
             id="lastName"
             name="lastName"
             placeholder="Insira seu último nome"
+            required
           />
         </div>
         <div>
@@ -60,6 +62,7 @@ function SignUp() {
             id="email"
             name="email"
             placeholder="Insira seu email"
+            required
           />
         </div>
         <div>
@@ -71,6 +74,7 @@ function SignUp() {
             id="password"
             name="password"
             placeholder="Insira a senha"
+            required
           />
         </div>
         <div>
@@ -82,6 +86,7 @@ function SignUp() {
             id="confirmPassword"
             name="confirmPassword"
             placeholder="Confirme a senha"
+            required
           />
         </div>
         <ButtonPrimary>Criar conta</ButtonPrimary>
