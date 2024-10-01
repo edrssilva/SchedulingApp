@@ -45,10 +45,14 @@ function Login() {
       } else if (error.response.status == 401) {
         setSuccess("");
         setStatus("block");
-        setError("Usuário ou senha inválidos");
+        setError("Email ou senha inválidos");
       }
     }
   };
+
+  function handleSignUpClick() {
+    navigate("/cadastro");
+  }
 
   return (
     <div className="flex flex-col gap-8 max-[360px] p-8 rounded-lg bg-white shadow-md">
@@ -80,14 +84,22 @@ function Login() {
           />
           <a
             href="#"
-            className="relative float-end text-xs underline text-secondary-light"
+            className="relative float-end text-xs underline text-secondary"
           >
             Esqueci minha senha
           </a>
         </div>
-        <ButtonPrimary onClick={(e) => handleLoginClick(e)}>
-          Entrar
-        </ButtonPrimary>
+        <div className="flex flex-col gap-2">
+          <ButtonPrimary onClick={(e) => handleLoginClick(e)}>
+            Entrar
+          </ButtonPrimary>
+          <a
+            className="text-center text-sm text-primary underline cursor-pointer"
+            onClick={(e) => handleSignUpClick(e)}
+          >
+            Não tem uma conta ainda? Cadastre-se já!
+          </a>
+        </div>
       </form>
       <div className={`text-center m-0 p-0 ${statusShowing}`}>
         <span className="text-red-500 font-medium">{error}</span>

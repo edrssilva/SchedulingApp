@@ -16,13 +16,15 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "/signup",
+    path: "/cadastro",
     element: <SignUp />,
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <div className="w-screen h-screen flex justify-center items-center bg-body-light">
+      <RouterProvider router={router} />
+    </div>
   </StrictMode>
 );

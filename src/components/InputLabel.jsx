@@ -1,7 +1,7 @@
 function InputLabel(props) {
   return (
     <div>
-      <label {...props} lassName="font-semibold text-secondary-light">
+      <label {...props} className="font-semibold text-secondary">
         {props.children}
       </label>
     </div>

@@ -5,10 +5,10 @@ export default {
     extend: {
       colors: {
         primary: {
-          light: "#6200ed",
+          DEFAULT: "#6200ed",
         },
         secondary: {
-          light: "#546f7a",
+          DEFAULT: "#546f7a",
         },
         body: {
           light: "#f5f5f5",

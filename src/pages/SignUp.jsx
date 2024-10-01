@@ -5,14 +5,48 @@ import InputLabel from "../components/InputLabel";
 import InputControl from "../components/InputControl";
 import ButtonPrimary from "../components/ButtonPrimary";
 
-function onSignUpClick(
+async function handleSignUpClick(
   firstName,
   lastName,
   email,
   password,
-  confirmPassword,
-  phoneNumber
-) {}
+  confirmPassword
+) {
+  e.preventDefault();
+
+  if (password == confirmPassword) {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/usuarios",
+        JSON.stringify({ firstName, lastName, email, password }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      setError("");
+      setStatus("block");
+      setSuccess("Usuário cadastrado com sucesso, aguarde...");
+      await delay(2500);
+      setUser(response.data);
+      navigate("/");
+    } catch (error) {
+      if (!error?.response) {
+        setSuccess("");
+        setStatus("block");
+        setError("Erro ao acessar o servidor");
+      } else if (error.response.status == 422) {
+        setSuccess("");
+        setStatus("block");
+        setError("Insira dados válidos");
+      }
+    }
+  } else {
+    setSuccess("");
+    setStatus("block");
+    setError("As senhas não coincidem");
+  }
+}
 
 function SignUp() {
   const navigate = useNavigate();
@@ -22,7 +56,6 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
 
   return (
     <div className="flex flex-col gap-8 max-[360px] p-8 rounded-lg bg-white shadow-md">
@@ -89,7 +122,19 @@ function SignUp() {
             required
           />
         </div>
-        <ButtonPrimary>Criar conta</ButtonPrimary>
+        <ButtonPrimary
+          onClick={(e) =>
+            handleSignUpClick(
+              firstName,
+              lastName,
+              email,
+              password,
+              confirmPassword
+            )
+          }
+        >
+          Criar conta
+        </ButtonPrimary>
       </form>
     </div>
   );
