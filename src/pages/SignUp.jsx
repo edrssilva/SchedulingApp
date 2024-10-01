@@ -14,38 +14,7 @@ async function handleSignUpClick(
 ) {
   e.preventDefault();
 
-  if (password == confirmPassword) {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/usuarios",
-        JSON.stringify({ firstName, lastName, email, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      setError("");
-      setStatus("block");
-      setSuccess("Usuário cadastrado com sucesso, aguarde...");
-      await delay(2500);
-      setUser(response.data);
-      navigate("/");
-    } catch (error) {
-      if (!error?.response) {
-        setSuccess("");
-        setStatus("block");
-        setError("Erro ao acessar o servidor");
-      } else if (error.response.status == 422) {
-        setSuccess("");
-        setStatus("block");
-        setError("Insira dados válidos");
-      }
-    }
-  } else {
-    setSuccess("");
-    setStatus("block");
-    setError("As senhas não coincidem");
-  }
+  await api.post("/usuarios");
 }
 
 function SignUp() {

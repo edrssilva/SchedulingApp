@@ -5,6 +5,7 @@ import InputLabel from "../components/InputLabel";
 import InputControl from "../components/InputControl";
 import ButtonPrimary from "../components/ButtonPrimary";
 import axios from "axios";
+import api from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,26 +23,29 @@ function Login() {
 
     console.log(email, password);
 
+    const axiosLogin = {
+      method: "post",
+      url: "http://localhost:3000/login",
+      headers: { "Content-Type": "application/json" },
+      data: JSON.stringify({ email, password }),
+    };
     try {
-      const response = await axios.post(
-        "http://localhost:3000/login",
-        JSON.stringify({ email, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await axios(axiosLogin);
 
-      setError("");
-      setStatus("block");
-      setSuccess("Logado com sucesso, aguarde...");
-      await delay(2500);
-      setUser(response.data);
-      navigate("/dashboard");
+      if (response.status(200)) {
+        setError("");
+        setStatus("block");
+        setSuccess("Logado com sucesso, aguarde...");
+        await delay(2500);
+        setUser(response.data);
+        navigate("/dashboard");
+      }
     } catch (error) {
       if (!error?.response) {
         setSuccess("");
         setStatus("block");
         setError("Erro ao acessar o servidor");
+        console.log(response.error);
       } else if (error.response.status == 401) {
         setSuccess("");
         setStatus("block");
@@ -60,7 +64,7 @@ function Login() {
 
       <form action="" className="flex flex-col gap-8">
         <div>
-          <InputLabel for="email">Email</InputLabel>
+          <InputLabel htmlFor="email">Email</InputLabel>
           <InputControl
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -72,7 +76,7 @@ function Login() {
           />
         </div>
         <div>
-          <InputLabel for="password">Senha</InputLabel>
+          <InputLabel htmlFor="password">Senha</InputLabel>
           <InputControl
             value={password}
             onChange={(e) => setPassword(e.target.value)}
